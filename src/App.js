@@ -16,9 +16,9 @@ import SearchByName from './components/SearchByName';
 import AdminPanel from './components/AdminPanel';
 import './App.css';
 import OrgnizerPanel from './components/OrgnizerPanel';
+import { CheckCostumerDetailsById, CheckCostumerDetailsByName } from './components/CheckCostumerDetailsByIdAndName';
 // import artifacts from './artifacts/Ticket.json'
 // import { ethers } from 'ethers';
-
 const allContexts = createContext();
 function App() {
     const developer = "0x575cA73E642983fF8818F0cb0Fa692A788Bc45A4";
@@ -27,6 +27,7 @@ function App() {
     const [web3Api, setWeb3Api] = useState({ provider: null, signer: null, contract: null });
     const [totalEvents, setTotalEvents] = useState(0);
     const [eventDetails, setEventDetails] = useState(null);
+    const [costumerDetails, setCostumerDetails] = useState(null);
 
     useEffect(() => {
         function temp() {
@@ -38,7 +39,10 @@ function App() {
 
     return (
         <allContexts.Provider
-            value={{ web3Api, setWeb3Api, totalEvents, isDeveloper, setTotalEvents, eventDetails, setEventDetails }}>
+            value={{
+                web3Api, setWeb3Api, totalEvents, isDeveloper, setTotalEvents, eventDetails,
+                setEventDetails, costumerDetails, setCostumerDetails
+            }}>
             <HashRouter>
                 <div className="w-screen min-h-screen overflow-x-hidden">
                     <NavBar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
@@ -54,7 +58,11 @@ function App() {
                             <Route path='by-name' element={<SearchByName />} />
                         </Route>
 
-                        <Route path='costumer-details' element={< CheckCostumerDetails />} />
+                        <Route path='costumer-details' element={< CheckCostumerDetails />} >
+                            <Route index element={<CheckCostumerDetailsById />} />
+                            <Route path='by-id' element={<CheckCostumerDetailsById />} />
+                            <Route path='by-name' element={<CheckCostumerDetailsByName />} />
+                        </Route>
                         <Route path='support-developer' element={< SupportDeveloper />} />
                         <Route path='orgnizer-panel' element={< OrgnizerPanel />} />
                         <Route path='admin-panel' element={< AdminPanel />} />

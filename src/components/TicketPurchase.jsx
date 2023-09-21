@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react'
 import { allContexts } from '../App';
 import { tktPurchase } from '../utils/ContractInteractions';
+import { Link } from 'react-router-dom';
 const TicketPurchase = () => {
     const { web3Api } = useContext(allContexts);
     const id = useRef(null)
@@ -33,7 +34,8 @@ const TicketPurchase = () => {
                         <input required ref={quantity} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
                             placeholder='Enter ticket quantity' type="number" />
                     </div>
-                    <p className='text-left w-10/12 text-slate-700'>* total Price of the tickets will be : </p>
+                    <p className='text-left w-10/12 text-slate-700'>i suggest to check available Event first.
+                        <Link className='border-b-2 border-slate-900 mx-2 font-bold' to={'/search-events'}>click here</Link></p>
                     <div className='w-full flex align-center justify-end px-10'>
                         <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-4 rounded hover:scale-105 duration-300'>confirm</button>
                     </div>

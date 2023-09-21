@@ -1,26 +1,33 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link, Outlet } from 'react-router-dom'
+import { allContexts } from '../App'
+import CostumerDetails from './CostumerDetails'
 
 const CheckCostumerDetails = () => {
+    const { costumerDetails } = useContext(allContexts);
     return (
-        <div className='my-10 w-screen h-auto mb-96'>
-            <div className='lg:w-5/12 md:w-7/12 my-0 mx-auto w-11/12 h-auto border-2 border-slate-200 border-solid'>
-                <h3 className='text-2xl font-bold text-center my-4'>Check Costumer Details</h3>
-                <form className='p-3' action="">
-                    <div className='text-center'>
-                        <input required className='bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter event id' type="text" />
-                        <input required className='bg-slate-200 my-6 text-black px-4 rounded py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter event Name' type="text" />
-                        <input required className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter Costumer Address' type="text" />
+        <div className='w-screen h-auto flex justify-center'>
+
+            <div className='h-auto w-11/12 md:w-10/12 md:max-w-3xl mt-11 justify-center'>
+                <div className='h-auto w-11/12 md:w-10/12 md:max-w-3xl mt-11 justify-center'>
+                    <div className="w-full border-2 mb-3 border-slate-200" >
+                        <h3 className='text-2xl font-bold text-center my-4'>Costumer Details</h3>
+                        <nav className='md:w-10/12 w-11/12 h-3/6 flex justify-between mx-auto items-center bg-slate-900 text-slate-200 p-3'>
+                            <Link className='w-6/12 hover:scale-105 ease-in-out duration-200 transition-all text-center font-bold capitalize text-xl ' to={'by-id'}>Search by Id</Link>
+                            <Link className='w-6/12 hover:scale-105 ease-in-out duration-200 transition-all text-center font-bold capitalize text-xl' to={'by-name'}>Search by Name</Link>
+                        </nav>
+                        <Outlet />
                     </div>
-                    <p className='text-left w-10/12 text-slate-700 ml-4'>Make sure you entered teh correct address</p>
-                    <div className='w-full flex align-center justify-end px-10'>
-                        <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-4 rounded hover:scale-105 duration-300'>Search</button>
-                    </div>
-                </form >
+                </div>
+
+                {costumerDetails && (
+                    <CostumerDetails details={costumerDetails} />
+                )}
+
+
             </div>
-        </div >
+
+        </div>
     )
 }
 

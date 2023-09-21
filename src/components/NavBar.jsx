@@ -1,11 +1,17 @@
 import React, { useContext } from 'react'
 import { allContexts } from '../App'
 import { initializeWeb3Api } from '../utils/ContractInteractions'
+
 const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
     const handleMenu = (e) => {
         setIsMenuOpen(e.target.checked)
     }
     const { web3Api, setWeb3Api } = useContext(allContexts)
+
+    const initialize = async () => {
+        await initializeWeb3Api({ setWeb3Api });
+    }
+
     return (
         <div className='w-screen h-20 md:mt-5 mt-0'>
             <div className='flex md:px-20 px-10 w-full h-full justify-between items-center'>
@@ -30,7 +36,7 @@ const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
                     {web3Api.signer ?
                         <p className='font-bold text-lg'>{`${web3Api.signer.address}`.slice(0, 5) + '....' + `${web3Api.signer.address}`.slice(38, 43)}</p> :
                         <button onClick={async () => {
-                            await initializeWeb3Api({ setWeb3Api })
+                            await initialize();
                         }} className='px-4 py-2 bg-slate-900 rounded hover:scale-105 duration-300 capitalize font-bold text-slate-200'>wallet Connect</button>}
                 </div>
             </div>

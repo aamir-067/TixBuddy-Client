@@ -24,7 +24,7 @@ const ShowEventDetails = ({ eventDetails }) => {
     return (
         <div className='h-auto w-11/12 md:w-10/12 md:max-w-3xl mt-11 justify-center border-2 border-slate-200'>
             <div className='w-full h-full flex items-center justify-between'>
-                <div className='w-5/12 pl-2 bg-slate-900 text-slate-200'>
+                <div className='w-5/12 pl-2 h-full bg-slate-900 text-slate-200'>
                     <p className='p-1 font-bold md:text-lg text-md'>Id</p>
                     <p className='p-1 font-bold md:text-lg text-md'>Name</p>
                     <p className='p-1 font-bold md:text-lg text-md'>Venue</p>

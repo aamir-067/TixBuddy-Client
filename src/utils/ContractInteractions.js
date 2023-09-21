@@ -149,6 +149,7 @@ const ticketTransfer = async ({ to, quantity, eventId, eventName, web3Api }) => 
         } else {
             const res = await web3Api.contract.TransferTickets(to, quantity, eventId, eventName);
             console.log('response of transfer tickets ==>', res);
+            return res;
         }
     } catch (e) {
         console.error(e);
@@ -162,14 +163,16 @@ const checkCostumerTicketsById = async ({ web3Api, eventId, address }) => {
     try {
         if (!web3Api.contract) {
             alert('Please connect wallet first');
+            return undefined;
         } else {
-            let temp = await isValidEvent({ web3Api, eventId });
-            if (!temp) {
+            let temp = await searchById({ web3Api, eventId });
+            if (!temp[1]) {   // eventName != "" 
                 alert("This event is not valid please try again");
+                return undefined;
             } else {
                 let res = await web3Api.contract.tktHolders(address, eventId);
                 console.log('response of searching Costumer Event tickets details ==>', res);
-                return ethers.toNumber(res);
+                return { tkts: ethers.toNumber(res), eventName: temp[1], eventId: eventId, address: address };
             }
         }
     } catch (e) {
@@ -188,6 +191,8 @@ const checkCostumerTicketsByName = async ({ web3Api, eventName, address }) => {
                 let eventId = ethers.toNumber(tempEvent[0]);
                 let res = await checkCostumerTicketsById({ web3Api, eventId, address });
                 return res;
+            } else {
+                alert('You entered a wrong event name');
             }
         }
     } catch (e) {
