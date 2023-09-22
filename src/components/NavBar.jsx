@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { allContexts } from '../App'
 import { initializeWeb3Api } from '../utils/ContractInteractions'
+import { toast } from 'react-toastify';
 
 const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
     const handleMenu = (e) => {
@@ -9,7 +10,19 @@ const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
     const { web3Api, setWeb3Api } = useContext(allContexts)
 
     const initialize = async () => {
-        await initializeWeb3Api({ setWeb3Api });
+        toast.promise(new Promise(async (resolve, reject) => {
+            let response = await initializeWeb3Api({ setWeb3Api });
+            if (response) {
+                resolve();
+            } else {
+                reject();
+            }
+        }), {
+            success: 'Metamask connected successfully',
+            error: 'Metamask connection failed',
+            pending: 'connecting to metamask'
+        }
+        )
     }
 
     return (

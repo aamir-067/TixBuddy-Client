@@ -1,6 +1,7 @@
 const { ethers } = require('ethers');
 const artifacts = require('../artifacts/Ticket.json');
 let contractAddress = '0xa85c2779438411E22a220594e08031497abE648d';
+const { toast } = require('react-toastify');
 // let acc = "b3e5b1136f7e6ad214a07566d8d8a4d4853ae7dd9e10c696b177b637f53a88fb";
 // let url = "https://eth-sepolia.g.alchemy.com/v2/-swbKwsMm_2b92TCKf5i_HTgEUbbcqEk";
 
@@ -18,12 +19,14 @@ const initializeWeb3Api = async ({ setWeb3Api }) => {
             const signer = await provider.getSigner();
             const contract = await createContract({ signer })
             await setWeb3Api({ provider: provider, signer: signer, contract: contract });
+            return true;
         } else {
             console.error('please install metamask');
-            process.exit(1);
+            return false;
         }
     } catch (e) {
         console.error(e);
+        return false;
     }
 }
 
@@ -66,7 +69,7 @@ const searchById = async ({ eventId, web3Api }) => {
 
         } else {
             const res = await web3Api.contract.searchEventById(eventId);
-            console.log('response of searching event ===>', res);
+            // console.log('response of searching event ===>', res);
             return res;
         }
     } catch (e) {
@@ -82,7 +85,7 @@ const searchByName = async ({ eventName, web3Api }) => {
 
         } else {
             const res = await web3Api.contract.searchEventByName(eventName);
-            console.log('response of searching event', res);
+            // console.log('response of searching event', res);
             return res;
         }
     } catch (e) {
@@ -97,6 +100,7 @@ async function isValidEvent({ eventId, web3Api }) {
     try {
         let temp = await searchById({ eventId, web3Api });
         if (temp[1] === '') { return false }   // name === ''
+        if (ethers.toNumber(temp[3]) <= Math.floor(Date.now() / 1000)) { return false } // event is expired
         if (ethers.toNumber(temp[5]) === 0) { return false }  // avail tkts
         if (ethers.toNumber(temp[6]) === 0) { return false } // tktPrice === 0 
         return true;
@@ -109,11 +113,12 @@ async function isValidEvent({ eventId, web3Api }) {
 async function tktPurchase({ eventId, eventName, tktsCount, web3Api }) {
     try {
         if (!web3Api.contract) {
-            alert('Please Connect Wallet First');
+            // alert('Please Connect Wallet First');
+            return false;
 
         }
         else if (tktsCount <= 0) {
-            alert('You must have to purchase at least one ticket');
+            return false;
         }
         else {
             const temp = await searchById({ eventId, web3Api });
@@ -121,16 +126,15 @@ async function tktPurchase({ eventId, eventName, tktsCount, web3Api }) {
             let totalPrice = eventPrice * tktsCount;
             const validEvent = await isValidEvent({ eventId, web3Api });
             if (!validEvent) {  // its not a valid event
-                alert('This event is not valid');
-                return;
+                return false;
             }
-
             const res = await web3Api.contract.purchaseTkt(eventId, eventName, tktsCount, { value: ethers.toBigInt(totalPrice) });
-            console.log('response of purchasing event tickets==>', res);
-            return res;
+            // console.log('response of purchasing event tickets==>', res);
+            return true;
         }
     } catch (e) {
         console.error(e);
+        return false;
     }
 }
 

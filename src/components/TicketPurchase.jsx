@@ -2,6 +2,7 @@ import React, { useContext, useRef } from 'react'
 import { allContexts } from '../App';
 import { tktPurchase } from '../utils/ContractInteractions';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const TicketPurchase = () => {
     const { web3Api } = useContext(allContexts);
     const id = useRef(null)
@@ -18,13 +19,31 @@ const TicketPurchase = () => {
                     let tktsCount = quantity.current.value;
                     eventId = Number(eventId);
                     tktsCount = Number(tktsCount);
-                    const response = await tktPurchase({ eventId, eventName, tktsCount, web3Api });
-                    if (response) {
-                        alert('Tickets a purchased Successfully')
-                        id.current.value = '';
-                        name.current.value = '';
-                        quantity.current.value = '';
-                    } else { alert('Tickets are Not Successfully purchased.') }
+
+
+                    toast.promise(
+                        new Promise(async (resolve, reject) => {
+                            const response = await tktPurchase({ eventId, eventName, tktsCount, web3Api })
+                            if (response) {
+                                // toast.success('Successfully Purchased Tickets');
+                                resolve(response);
+                                id.current.value = '';
+                                name.current.value = '';
+                                quantity.current.value = '';
+                            }
+                            else reject(undefined);
+                        }), {
+                        success: 'Successfully Purchased Tickets',
+                        error: 'Unknown Error Ocurred',
+                        pending: 'Processing please wait'
+                    })
+                    // const response = await tktPurchase({ eventId, eventName, tktsCount, web3Api })
+                    // if (response) {
+                    //     toast.success('Successfully Purchased Tickets');
+                    //     id.current.value = '';
+                    //     name.current.value = '';
+                    //     quantity.current.value = '';
+                    // }
                 }}>
                     <div className='text-center'>
                         <input required ref={id} className='bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'

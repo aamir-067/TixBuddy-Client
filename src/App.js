@@ -1,4 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import TicketPurchase from './components/TicketPurchase';
@@ -71,6 +73,18 @@ function App() {
                 </div>
                 <Footer />
             </HashRouter>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </allContexts.Provider>
     );
 }
