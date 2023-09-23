@@ -58,20 +58,15 @@ const OrgnizeEvent = () => {
                 }}>
                     <div className='text-center'>
 
-                        <input required ref={name} className='bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Name' type="text" />
+                        <input required ref={name} className='input_all_style' placeholder='Name' type="text" />
 
-                        <input required ref={venue} className='bg-slate-200 my-6 text-black px-4 rounded py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Venue' type="text" />
+                        <input required ref={venue} className='input_all_style my-6' placeholder='Venue' type="text" />
 
-                        <input required ref={time} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Time (in Unix timestamp)' type="datetime-local" />
+                        <input required ref={time} className='input_all_style mb-6' placeholder='Time (in Unix timestamp)' type="datetime-local" />
 
-                        <input required ref={tktQuantity} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter total ticket quantity' type="number" />
+                        <input required ref={tktQuantity} className='input_all_style' placeholder='Enter total ticket quantity' type="number" />
 
-                        <input required ref={tktPrice} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Price per ticket in wei' type="number" />
+                        <input required ref={tktPrice} className='input_all_style my-6' placeholder='Price per ticket in wei' type="number" />
 
                     </div>
                     <p className='text-left w-10/12 text-slate-700'>* Make sure that you read the terms and conditions.</p>

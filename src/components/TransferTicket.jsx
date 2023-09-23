@@ -40,17 +40,14 @@ const TransferTicket = () => {
                     }}>
                         <div className='text-center'>
 
-                            <input required ref={toAddress} className='bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
+                            <input required ref={toAddress} className='input_all_style'
                                 placeholder='Receiver Address' type="text" />
 
-                            <input required ref={quan} className='bg-slate-200 my-6 text-black px-4 rounded py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                                placeholder='Quantity' type="number" />
+                            <input required ref={quan} className='input_all_style my-6' placeholder='Quantity' type="number" />
 
-                            <input required ref={id} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                                placeholder='Event Id' type="number" />
+                            <input required ref={id} className='input_all_style' placeholder='Event Id' type="number" />
 
-                            <input required ref={name} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                                placeholder='Event Name' type="text" />
+                            <input required ref={name} className='input_all_style my-6' placeholder='Event Name' type="text" />
 
 
                         </div>

@@ -16,10 +16,8 @@ const CheckCostumerDetailsById = () => {
                 setCostumerDetails(response)
                 console.log("response from checking the costumer details by id ", response);
             }}>
-                <input required ref={e} className='bg-slate-200 text-black px-4 mt-6 mb-3 py-2 rounded md:w-7/12 w-11/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                    placeholder='Event id' type="number" />
-                <input required ref={add} className='bg-slate-200 text-black px-4 mt-6 mb-3 py-2 rounded md:w-7/12 w-11/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                    placeholder='Costumer Address' type="text" />
+                <input required ref={e} className='input_all_style my-6' placeholder='Event id' type="number" />
+                <input required ref={add} className='input_all_style mb-6' placeholder='Costumer Address' type="text" />
 
                 <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-4 rounded hover:scale-105 duration-300'>Search</button>
             </form>
@@ -46,10 +44,8 @@ const CheckCostumerDetailsByName = () => {
                 setCostumerDetails(response)
                 console.log("response from checking the costumer details by name ", response);
             }}>
-                <input required ref={n} className='bg-slate-200 text-black px-4 mt-6 mb-3 py-2 rounded md:w-7/12 w-11/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                    placeholder='Event name' type="text" />
-                <input required ref={add} className='bg-slate-200 text-black px-4 mt-6 mb-3 py-2 rounded md:w-7/12 w-11/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                    placeholder='Costumer Address' type="text" />
+                <input required ref={n} className='input_all_style mt-6' placeholder='Event name' type="text" />
+                <input required ref={add} className='input_all_style my-6' placeholder='Costumer Address' type="text" />
                 <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-4 rounded hover:scale-105 duration-300'>Search</button>
             </form>
             <div className='p-4'>

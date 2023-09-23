@@ -46,12 +46,9 @@ const TicketPurchase = () => {
                     // }
                 }}>
                     <div className='text-center'>
-                        <input required ref={id} className='bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter event id' type="number" />
-                        <input required ref={name} className='bg-slate-200 my-6 text-black px-4 rounded py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter event Name' type="text" />
-                        <input required ref={quantity} className='bg-slate-200 text-black px-4 mb-6 py-2 rounded w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                            placeholder='Enter ticket quantity' type="number" />
+                        <input required ref={id} className='input_all_style' placeholder='Enter event id' type="number" />
+                        <input required ref={name} className='input_all_style my-6' placeholder='Enter event Name' type="text" />
+                        <input required ref={quantity} className='input_all_style mb-6' placeholder='Enter ticket quantity' type="number" />
                     </div>
                     <p className='text-left w-10/12 text-slate-700'>i suggest to check available Event first.
                         <Link className='border-b-2 border-slate-900 mx-2 font-bold' to={'/search-events'}>click here</Link></p>

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input_all_style {
+	@apply bg-slate-200 text-black px-4 rounded-sm py-2 w-10/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid shadow-[rgba(17,_17,_26,_0.15)_0px_0px_16px];
+}

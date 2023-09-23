@@ -18,8 +18,7 @@ const SearchById = () => {
                 const response = await searchById({ web3Api, eventId })
                 setEventDetails(response);
             }}>
-                <input required ref={eveId} className='bg-slate-200 text-black px-4 mt-6 mb-3 py-2 rounded md:w-7/12 w-11/12 focus:outline-none focus:border-2 focus:border-black focus:border-solid'
-                    placeholder='Enter event id' type="number" />
+                <input required ref={eveId} className='input_all_style mt-6' placeholder='Enter event id' type="number" />
                 <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-4 rounded hover:scale-105 duration-300'>Search</button>
             </form>
             <div className='p-4 mx-4'>
