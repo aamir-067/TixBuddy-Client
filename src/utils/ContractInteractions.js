@@ -18,6 +18,12 @@ const initializeWeb3Api = async ({ setWeb3Api }) => {
             const signer = await provider.getSigner();
             const contract = await createContract({ signer })
             await setWeb3Api({ provider: provider, signer: signer, contract: contract });
+            window.ethereum.on('chainChanged', async () => {
+                await initializeWeb3Api({ setWeb3Api });
+            });
+            window.ethereum.on('accountsChanged', async () => {
+                await initializeWeb3Api({ setWeb3Api });
+            });
             return true;
         } else {
             console.error('please install metamask');

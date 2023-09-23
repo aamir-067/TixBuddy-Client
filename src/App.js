@@ -32,13 +32,6 @@ function App() {
     const [eventDetails, setEventDetails] = useState(null);
     const [costumerDetails, setCostumerDetails] = useState(null);
 
-    window.ethereum.on('chainChanged', async () => {
-        await initializeWeb3Api({ setWeb3Api });
-    });
-    window.ethereum.on('accountsChanged', async () => {
-        await initializeWeb3Api({ setWeb3Api });
-    });
-
 
     useEffect(() => {
         function temp() {
