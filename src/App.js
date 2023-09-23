@@ -44,11 +44,11 @@ function App() {
         <allContexts.Provider
             value={{
                 web3Api, setWeb3Api, totalEvents, isDeveloper, setTotalEvents, eventDetails,
-                setEventDetails, costumerDetails, setCostumerDetails
+                setEventDetails, costumerDetails, setCostumerDetails, setIsMenuOpen, isMenuOpen
             }}>
             <HashRouter>
-                <div className="w-screen min-h-screen overflow-x-hidden">
-                    <NavBar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
+                <div className="w-screen min-h-screen overflow-x-hidden bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100">
+                    <NavBar />
                     <Menu isOpen={isMenuOpen} />
                     <Routes>
                         <Route path='/' element={<Hero isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />} />

@@ -16,8 +16,8 @@ const OrgnizeEvent = () => {
 
 
     return (
-        <div className='my-10 w-screen h-auto mb-96'>
-            <div className='lg:w-5/12 md:w-7/12 my-0 mx-auto w-11/12 h-auto border-2 border-slate-200 border-solid'>
+        <div className='my-10 w-screen h-auto mb-96 '>
+            <div className='lg:w-5/12 md:w-7/12 my-0 mx-auto w-11/12 h-auto  shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]'>
                 <h3 className='text-2xl font-bold text-center my-4'>Organize Event</h3>
                 <form className='p-3' action="" onSubmit={async (e) => {
                     e.preventDefault();

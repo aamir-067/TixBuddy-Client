@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -12,10 +12,10 @@ const Footer = () => {
                         <li className='text-xl hover:cursor-pointer'><a href="https://portfolio-of-aamir.netlify.app" target='_blank' rel='noreferrer'><i class="fa-solid fa-link"></i></a></li>
                         <li className='text-xl hover:cursor-pointer'><a href="https://wa.me/qr/UTQ77REDUBC7N1" target='_blank' rel='noreferrer'><i class="fa-brands fa-whatsapp"></i></a></li>
                     </ul>
-                    <h2 className='text-slate-200 font-bolder capitalize'>made by Aamir with 🩷</h2>
+                    <h2 className='text-slate-200 font-bolder capitalize'>made by Aamir with <i className="fa-solid fa-heart text-slate-200"></i></h2>
 
                     <div className=' hidden md:block hover:scale-105 ease-in-out duration-300'>
-                        <Link to={'/support-developer'} className='bg-slate-200 text-slate-900 px-4 py-2 font-bold rounded'>Support developer</Link>
+                        {/* <Link to={'/support-developer'} className='bg-slate-200 text-slate-900 px-4 py-2 font-bold rounded'>Support developer</Link> */}
                     </div>
                 </div>
 

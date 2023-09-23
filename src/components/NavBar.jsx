@@ -3,11 +3,11 @@ import { allContexts } from '../App'
 import { initializeWeb3Api } from '../utils/ContractInteractions'
 import { toast } from 'react-toastify';
 
-const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
+const NavBar = () => {
     const handleMenu = (e) => {
         setIsMenuOpen(e.target.checked)
     }
-    const { web3Api, setWeb3Api } = useContext(allContexts)
+    const { web3Api, setWeb3Api, setIsMenuOpen, isMenuOpen } = useContext(allContexts)
 
     const initialize = async () => {
         toast.promise(new Promise(async (resolve, reject) => {
@@ -42,10 +42,10 @@ const NavBar = ({ setIsMenuOpen, isMenuOpen }) => {
                     ${isMenuOpen ? 'transform -rotate-45 -translate-y-1 duration-500 -ml-0 -mt-1' : ''}`}></div>
                 </div>
 
-                <div className='md:text-3xl tracking-wider text-xl capitalize font-sans font-bold mr-3/6 md:mr-0'>
+                <div className='md:text-3xl hidden md:block tracking-wider text-xl capitalize font-sans font-bold mr-3/6 md:mr-0'>
                     TixBuddy
                 </div>
-                <div className='hidden md:block'>
+                <div>
                     {web3Api.signer ?
                         <p className='font-bold text-lg'>{`${web3Api.signer.address}`.slice(0, 5) + '....' + `${web3Api.signer.address}`.slice(38, 43)}</p> :
                         <button onClick={async () => {

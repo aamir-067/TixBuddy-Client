@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroImage from '../pics/hero1.jpg'
+import HeroImage from '../pics/hero1.png'
 import { Link } from 'react-router-dom'
 
 const Hero = ({ setIsMenuOpen, isMenuOpen }) => {
