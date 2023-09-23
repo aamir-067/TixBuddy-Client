@@ -18,7 +18,7 @@ const Hero = ({ setIsMenuOpen, isMenuOpen }) => {
                     <div className='temp hidden md:block'></div>
                 </div>
                 <div className='h-full md:w-6/12 w-full md:flex justify-between items-center md:mr-20'>
-                    <img className='h-10/12 w-10/12  md:w-full md:h-full object-cover' src={HeroImage} alt="a simple image" />
+                    <img className='h-10/12 w-10/12  md:w-full md:h-full object-cover' src={HeroImage} alt="two peoples hand exchanging a file or ticket" />
                 </div>
             </div>
         </div>

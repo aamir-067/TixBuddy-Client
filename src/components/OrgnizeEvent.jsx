@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { allContexts } from '../App';
 import { EventOrgnize, seeTotalEvents } from '../utils/ContractInteractions';
+import { toast } from 'react-toastify';
 // import { ethers } from 'ethers';
 
 
@@ -40,7 +41,14 @@ const OrgnizeEvent = () => {
 
                     // console.log(eveName, eveVenue, unixTime, eveTktsQuantity, tktPriceInWei);
 
-                    await EventOrgnize({ web3Api, eveName, eveVenue, unixTime, eveTktsQuantity, tktPriceInWei })
+                    toast.promise(new Promise(async (resolve, reject) => {
+                        const res = await EventOrgnize({ web3Api, eveName, eveVenue, unixTime, eveTktsQuantity, tktPriceInWei })
+                        res ? resolve() : reject();
+                    }), {
+                        success: 'Event organized successfully',
+                        pending: 'processing',
+                        error: 'Error occurred'
+                    })
 
                     setTimeout(async () => {   // to update the total events count. (not necessary)
                         const res = await seeTotalEvents({ web3Api, setWeb3Api });

@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { ticketTransfer } from '../utils/ContractInteractions';
 import { allContexts } from '../App';
+import { toast } from 'react-toastify';
 
 const TransferTicket = () => {
     const { web3Api } = useContext(allContexts);
@@ -19,13 +20,22 @@ const TransferTicket = () => {
                         const quantity = quan.current.value;
                         const eventId = id.current.value;
                         const eventName = name.current.value;
-                        if (!eventName || Number(eventId) < 0) {
-                            alert('Enter a valid event name and event id');
-                        } else {
-                            let res = await ticketTransfer({ quantity, eventId, eventName, web3Api, to });
-                            console.log('transferring tickets res ==>', res);
-                            // ! ======= Handle the response here accordingly and determine that its transfer or not. ========
-                        }
+
+                        toast.promise(new Promise(async (resolve, reject) => {
+                            if (!eventName || Number(eventId) < 0) {
+                                // alert('Enter a valid event name and event id');
+                                reject();
+                            } else {
+                                let res = await ticketTransfer({ quantity, eventId, eventName, web3Api, to });
+                                // console.log('transferring tickets res ==>', res);
+                                res ? resolve() : reject();
+                            }
+                        }), {
+                            success: 'ss',
+                            error: 'err',
+                            pending: 'processing'
+                        })
+
 
                     }}>
                         <div className='text-center'>

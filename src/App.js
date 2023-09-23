@@ -19,6 +19,7 @@ import AdminPanel from './components/AdminPanel';
 import './App.css';
 import OrgnizerPanel from './components/OrgnizerPanel';
 import { CheckCostumerDetailsById, CheckCostumerDetailsByName } from './components/CheckCostumerDetailsByIdAndName';
+import { initializeWeb3Api } from './utils/ContractInteractions';
 // import artifacts from './artifacts/Ticket.json'
 // import { ethers } from 'ethers';
 const allContexts = createContext();
@@ -30,6 +31,14 @@ function App() {
     const [totalEvents, setTotalEvents] = useState(0);
     const [eventDetails, setEventDetails] = useState(null);
     const [costumerDetails, setCostumerDetails] = useState(null);
+
+    window.ethereum.on('chainChanged', async () => {
+        await initializeWeb3Api({ setWeb3Api });
+    });
+    window.ethereum.on('accountsChanged', async () => {
+        await initializeWeb3Api({ setWeb3Api });
+    });
+
 
     useEffect(() => {
         function temp() {

@@ -8,9 +8,9 @@ const Footer = () => {
                 <div
                     className='w-full h-full bg-slate-900 text-slate-200 flex justify-around items-center'>
                     <ul className='hidden md:flex gap-10'>
-                        <li className='text-xl hover:cursor-pointer'><a href="https://www.linkedin.com/in/i-aamir-khan/" target='_blank'><i class="fa-brands fa-linkedin-in"></i></a></li>
-                        <li className='text-xl hover:cursor-pointer'><a href="https://portfolio-of-aamir.netlify.app" target='_blank'><i class="fa-solid fa-link"></i></a></li>
-                        <li className='text-xl hover:cursor-pointer'><a href="https://wa.me/qr/UTQ77REDUBC7N1" target='_blank'><i class="fa-brands fa-whatsapp"></i></a></li>
+                        <li className='text-xl hover:cursor-pointer'><a href="https://www.linkedin.com/in/i-aamir-khan/" target='_blank' rel='noreferrer'><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        <li className='text-xl hover:cursor-pointer'><a href="https://portfolio-of-aamir.netlify.app" target='_blank' rel='noreferrer'><i class="fa-solid fa-link"></i></a></li>
+                        <li className='text-xl hover:cursor-pointer'><a href="https://wa.me/qr/UTQ77REDUBC7N1" target='_blank' rel='noreferrer'><i class="fa-brands fa-whatsapp"></i></a></li>
                     </ul>
                     <h2 className='text-slate-200 font-bolder capitalize'>made by Aamir with 🩷</h2>
 
