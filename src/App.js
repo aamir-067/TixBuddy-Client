@@ -19,7 +19,6 @@ import AdminPanel from './components/AdminPanel';
 import './App.css';
 import OrgnizerPanel from './components/OrgnizerPanel';
 import { CheckCostumerDetailsById, CheckCostumerDetailsByName } from './components/CheckCostumerDetailsByIdAndName';
-import { initializeWeb3Api } from './utils/ContractInteractions';
 // import artifacts from './artifacts/Ticket.json'
 // import { ethers } from 'ethers';
 const allContexts = createContext();
