@@ -15,7 +15,7 @@ const Footer = () => {
                     <h2 className='text-slate-200 font-bolder capitalize'>made by Aamir with <i className="fa-solid fa-heart text-slate-200"></i></h2>
 
                     <div className=' hidden md:block hover:scale-105 ease-in-out duration-300'>
-                        {/* <Link to={'/support-developer'} className='bg-slate-200 text-slate-900 px-4 py-2 font-bold rounded'>Support developer</Link> */}
+                        <a href="https://liftethers.netlify.app/" rel='noreferrer' target='_blank' className='bg-slate-200 text-slate-900 px-4 py-2 font-bold rounded'> Support Developer</a>
                     </div>
                 </div>
 

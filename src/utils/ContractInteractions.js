@@ -42,7 +42,9 @@ const EventOrgnize = async ({ web3Api, eveName, eveVenue, unixTime, eveTktsQuant
             return false;
         } else {
             console.log('web3Api.contract ==> ', web3Api.contract);
-            const res = await web3Api.contract.createEvent(eveName, eveVenue, unixTime, eveTktsQuantity, tktPriceInWei, { value: ethers.parseEther('0.001') });
+            let pp = ethers.parseEther(tktPriceInWei);
+            pp = ethers.toNumber(pp);
+            const res = await web3Api.contract.createEvent(eveName, eveVenue, unixTime, eveTktsQuantity, pp, { value: ethers.parseEther('0.001') });
             console.log('response of event Creation ====>', res);
             return false;
         }

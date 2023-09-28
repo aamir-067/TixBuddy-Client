@@ -9,7 +9,7 @@ const Menu = () => {
         ${isMenuOpen ? 'right-0' : 'right-full'}`}>
             <div className='bg-slate-900 w-11/12 max-w-xs h-5/6 '>
                 <ul className='h-full w-full flex flex-col justify-start mx-6 gap-4'>
-                    <li className='text-slate-200 text-xl mx mt-6 hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
+                    <li className='text-slate-200 text-xl mx mt-6 hover:scale-125 hover:ml-8 hover:font-bold ease-in-out duration-300'>
                         <Link to={'/'} onClick={() => { setIsMenuOpen(false) }}>Home</Link>
                     </li>
                     <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
@@ -30,6 +30,9 @@ const Menu = () => {
                     {/* <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
                         <Link to={'/orgnizer-panel'} onClick={() => { setIsMenuOpen(false) }}>Orgnizer Page</Link>
                     </li> */}
+                    <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
+                        <a href="https://liftethers.netlify.app/" rel='noreferrer' target='_blank' onClick={() => { setIsMenuOpen(false) }}> Support Developer</a>
+                    </li>
                     {isDeveloper && (<li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
                         <Link to={'/admin-panel'} onClick={() => { setIsMenuOpen(false) }}>Admin Panel</Link>
                     </li>)}

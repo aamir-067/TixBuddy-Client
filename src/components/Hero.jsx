@@ -10,7 +10,7 @@ const Hero = ({ setIsMenuOpen, isMenuOpen }) => {
                     <div className='w-full'>
                         <h2 className='md:text-4xl text-2xl font-bold capitalize '>Get Ready for Hassle-Free Event Access</h2>
                         <h4 className='text-md md:text-xl font-bold text-left my-4'>Plan Your Next Adventure</h4>
-                        <p>"Welcome to TixBuddy, where event enthusiasts effortlessly discover and purchase tickets, while also having the freedom to securely share them with friends. Join us for a simplified, community-driven approach to event experiences."</p>
+                        <p>Welcome to TixBuddy, where event enthusiasts effortlessly discover and purchase tickets, while also having the freedom to securely share them with friends. Join us for a simplified, community-driven approach to event experiences.</p>
                         <div className='md:flex gap-20 mt-6 items-center'>
                             <Link to={'/purchase-tkt'}>   <button className='py-1 px-4 text-lg font-bold text-slate-200 capitalize hover:scale-105 transition-all ease-in-out duration-300 rounded bg-slate-900 '>get started</button> </Link>
                         </div>
