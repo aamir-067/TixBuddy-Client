@@ -1,16 +1,15 @@
 import React, { useContext, useRef, useState } from 'react'
 import { allContexts } from '../App';
 import { formatUnixTimestamp } from './ShowEventDetails';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { showEventDetailsForOwner } from '../utils/ContractInteractions';
+import { showEventDetailsForOwner, withdrawEventFunds, checkCostumerTicketsById } from '../utils/ContractInteractions';
 import { ethers } from 'ethers';
 const OrgnizerPanel = () => {
     const { web3Api } = useContext(allContexts);
-    // const realOwner = true;
     const id = useRef(null);
     const name = useRef(null);
     const [eventDetails, setEventDetails] = useState(null);
+    const [tktsAmount, setTicketsAmount] = useState([]);
     return (
         <div className='my-10 w-screen min-w-screen h-auto'>
             <div className='lg:w-5/12 md:w-7/12 my-0 mx-auto w-11/12 h-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]'>
@@ -25,10 +24,16 @@ const OrgnizerPanel = () => {
                         toast.promise(
                             new Promise(async (resolve, reject) => {
                                 const response = await showEventDetailsForOwner({ eventId, eventName, web3Api })
+                                console.log('holders =====>', response[9]);
                                 if (response) {
                                     resolve(response);
                                     id.current.value = '';
                                     name.current.value = '';
+                                    for (let i = 0; i < response[9].length; i++) {
+                                        const res = await checkCostumerTicketsById({ web3Api, eventId: ethers.toNumber(response[0]), address: response[9][i] })
+                                        console.log(res.tkts);
+                                        setTicketsAmount([...tktsAmount, res.tkts]);
+                                    }
                                     setEventDetails(response);
                                 }
                                 else reject(undefined);
@@ -71,7 +76,19 @@ const OrgnizerPanel = () => {
                             </div>
                         </div>
                         <div className='w-full flex justify-center items-center'>
-                            <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-8 rounded hover:scale-105 duration-300'>Withdraw funds</button>
+                            <button className='bg-slate-900 w-fit text-slate-200 px-4 py-2 uppercase my-8 rounded hover:scale-105 duration-300' onClick={() => {
+
+                                toast.promise(
+                                    new Promise(async (resolve, reject) => {
+                                        const response = withdrawEventFunds({ web3Api, event: eventDetails });
+                                        response ? resolve(response) : reject(undefined);
+                                    }), {
+                                    success: 'Withdraw successfully',
+                                    error: 'Unknown Error Ocurred',
+                                    pending: 'Processing please wait'
+                                })
+
+                            }}>Withdraw funds</button>
                         </div>
                     </div>
                 </div>
@@ -87,10 +104,12 @@ const OrgnizerPanel = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className='border  py-2 px-4 border-slate-400'>0x0000000000000000000000000</td>
-                                    <td className='border py-2 px-4 border-slate-400'>26</td>
-                                </tr>
+                                {eventDetails[9].map((holder, index) => {
+                                    return <tr id={index}>
+                                        <td className='border  py-2 px-4 border-slate-400'>{holder}</td>
+                                        <td className='border py-2 px-4 border-slate-400'>{tktsAmount[index]}</td>
+                                    </tr>
+                                })}
                             </tbody>
                         </table>
                     </div>

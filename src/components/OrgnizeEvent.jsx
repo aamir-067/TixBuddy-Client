@@ -66,7 +66,7 @@ const OrgnizeEvent = () => {
 
                         <input required ref={tktQuantity} className='input_all_style' placeholder='Enter total ticket quantity' type="number" />
 
-                        <input required ref={tktPrice} className='input_all_style my-6' placeholder='Price per ticket in eth' type="number" />
+                        <input required ref={tktPrice} className='input_all_style my-6' placeholder='Price per ticket in eth' type="number" min={0} step={0.0000001} />
 
                     </div>
                     <p className='text-left w-10/12 text-slate-700'>* Make sure that you read the terms and conditions.</p>
