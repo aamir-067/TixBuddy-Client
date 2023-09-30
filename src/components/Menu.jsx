@@ -27,9 +27,9 @@ const Menu = () => {
                     <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
                         <Link to={'/costumer-details'} onClick={() => { setIsMenuOpen(false) }}>Costumer Details</Link>
                     </li>
-                    {/* <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
+                    <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
                         <Link to={'/orgnizer-panel'} onClick={() => { setIsMenuOpen(false) }}>Orgnizer Page</Link>
-                    </li> */}
+                    </li>
                     <li className='text-slate-200 text-xl mx hover:scale-125 hover:font-bold hover:ml-8 ease-in-out duration-300'>
                         <a href="https://liftethers.netlify.app/" rel='noreferrer' target='_blank' onClick={() => { setIsMenuOpen(false) }}> Support Developer</a>
                     </li>

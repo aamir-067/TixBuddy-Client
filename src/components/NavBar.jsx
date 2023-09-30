@@ -18,7 +18,7 @@ const NavBar = () => {
                 reject();
             }
         }), {
-            success: 'Metamask connected successfully',
+            success: 'Metamask connected',
             error: 'Metamask connection failed',
             pending: 'connecting to metamask'
         }

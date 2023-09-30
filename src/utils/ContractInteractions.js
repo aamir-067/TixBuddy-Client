@@ -220,10 +220,48 @@ const checkCostumerTicketsByName = async ({ web3Api, eventName, address }) => {
 }
 
 
+// Event Organizer Functions.
+const CheckWhetherItsOwner = async () => {
+    try {
+
+    } catch (e) {
+
+    }
+}
+
+const showEventDetailsForOwner = async ({ web3Api, eventId, eventName }) => {
+    try {
+        if (!web3Api.contract) {
+            alert("Please connect wallet first");
+            return false;
+        } else {
+            let res = await searchById({ web3Api, eventId });
+            if (res[1] !== eventName) {  // event name is not matching.
+                alert('This event does not exist');
+                return false;
+            }
+
+            // check if caller is owner or not.
+            if (res[7] !== web3Api.signer.address) {
+                alert('you are not owner of this event');
+                return false;
+            }
+            return res;
+
+        }
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
+}
+
+const WithdrawEventFunds = async () => {
+
+}
 
 
 
 export {
     initializeWeb3Api, EventOrgnize, seeTotalEvents, searchById, searchByName, tktPurchase, ticketTransfer,
-    checkCostumerTicketsById, checkCostumerTicketsByName
+    checkCostumerTicketsById, checkCostumerTicketsByName, showEventDetailsForOwner
 };

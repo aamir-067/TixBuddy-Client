@@ -25,7 +25,6 @@ const TicketPurchase = () => {
                         new Promise(async (resolve, reject) => {
                             const response = await tktPurchase({ eventId, eventName, tktsCount, web3Api })
                             if (response) {
-                                // toast.success('Successfully Purchased Tickets');
                                 resolve(response);
                                 id.current.value = '';
                                 name.current.value = '';
@@ -37,13 +36,6 @@ const TicketPurchase = () => {
                         error: 'Unknown Error Ocurred',
                         pending: 'Processing please wait'
                     })
-                    // const response = await tktPurchase({ eventId, eventName, tktsCount, web3Api })
-                    // if (response) {
-                    //     toast.success('Successfully Purchased Tickets');
-                    //     id.current.value = '';
-                    //     name.current.value = '';
-                    //     quantity.current.value = '';
-                    // }
                 }}>
                     <div className='text-center'>
                         <input required ref={id} className='input_all_style' placeholder='Enter event id' type="number" />
