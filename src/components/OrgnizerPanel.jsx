@@ -24,19 +24,20 @@ const OrgnizerPanel = () => {
                         toast.promise(
                             new Promise(async (resolve, reject) => {
                                 const response = await showEventDetailsForOwner({ eventId, eventName, web3Api })
-                                console.log('holders =====>', response[9]);
                                 if (response) {
                                     resolve(response);
                                     id.current.value = '';
                                     name.current.value = '';
+                                    const temp = []
                                     for (let i = 0; i < response[9].length; i++) {
                                         const res = await checkCostumerTicketsById({ web3Api, eventId: ethers.toNumber(response[0]), address: response[9][i] })
-                                        console.log(res.tkts);
-                                        setTicketsAmount([...tktsAmount, res.tkts]);
+
+                                        temp.push(res.tkts);
                                     }
+                                    setTicketsAmount(temp);
                                     setEventDetails(response);
                                 }
-                                else reject(undefined);
+                                else { reject(undefined); }
                             }), {
                             success: 'Loading completed',
                             error: 'Unknown Error Ocurred',

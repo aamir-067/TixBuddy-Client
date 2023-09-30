@@ -9,7 +9,9 @@
 1. added a feature so that a costumer can check for the event tickets either by event id or the event name.
 2. person can transfer tickets to each others.
 
-## Completion status :` Not Complete yet`
+## Completion status :`Fully functional and complete`
+
+## Note : `there is always place for modifications.`
 
 # Getting Started with Create React App
 
