@@ -1,5 +1,5 @@
-const { ethers } = require('ethers');
-const artifacts = require('../artifacts/Ticket.json');
+import { ethers } from 'ethers';
+import artifacts from '../artifacts/Ticket.json';
 let contractAddress = '0xB420c03Ef2480Dd903E4f51e2670425DFdCFf576';
 // let acc = "b3e5b1136f7e6ad214a07566d8d8a4d4853ae7dd9e10c696b177b637f53a88fb";
 // let url = "https://eth-sepolia.g.alchemy.com/v2/-swbKwsMm_2b92TCKf5i_HTgEUbbcqEk";
@@ -45,8 +45,9 @@ const EventOrgnize = async ({ web3Api, eveName, eveVenue, unixTime, eveTktsQuant
             let pp = ethers.parseEther(tktPriceInWei);
             pp = ethers.toNumber(pp);
             const res = await web3Api.contract.createEvent(eveName, eveVenue, unixTime, eveTktsQuantity, pp, { value: ethers.parseEther('0.001') });
+            await res.wait();
             console.log('response of event Creation ====>', res);
-            return false;
+            return true;
         }
     } catch (e) {
         console.error('error in Event Organization', e);
@@ -139,8 +140,8 @@ async function tktPurchase({ eventId, eventName, tktsCount, web3Api }) {
                 alert('its not a valid event')
                 return false;
             }
-            await web3Api.contract.purchaseTkt(eventId, eventName, tktsCount, { value: totalPrice });
-            // console.log('response of purchasing event tickets==>', res);
+            const res = await web3Api.contract.purchaseTkt(eventId, eventName, tktsCount, { value: totalPrice });
+            await res.wait();
             return true;
         }
     } catch (e) {
@@ -168,7 +169,8 @@ const ticketTransfer = async ({ to, quantity, eventId, eventName, web3Api }) => 
             if (!validEvent) { return false; }
             const availTkts = await checkCostumerTicketsById({ web3Api, eventId, address: web3Api.signer.address });
             if (availTkts.tkts < quantity) { return false; } // not enough tickets.
-            await web3Api.contract.TransferTickets(to, quantity, eventId, eventName);
+            const res = await web3Api.contract.TransferTickets(to, quantity, eventId, eventName);
+            await res.wait();
             return true;
         }
     } catch (e) {
@@ -198,6 +200,7 @@ const checkCostumerTicketsById = async ({ web3Api, eventId, address }) => {
         }
     } catch (e) {
         console.error(e);
+        return undefined;
     }
 }
 
@@ -206,6 +209,7 @@ const checkCostumerTicketsByName = async ({ web3Api, eventName, address }) => {
     try {
         if (!web3Api.contract) {
             alert('Please connect wallet first');
+            return false;
         } else {
             let tempEvent = await searchByName({ eventName, web3Api });
             if (tempEvent[1]) {  // ==> eventName != '' ==> valid event
@@ -214,10 +218,12 @@ const checkCostumerTicketsByName = async ({ web3Api, eventName, address }) => {
                 return res;
             } else {
                 alert('You entered a wrong event name');
+                return false;
             }
         }
     } catch (e) {
         console.error(e);
+        return false;
     }
 }
 
@@ -258,10 +264,9 @@ const withdrawEventFunds = async ({ web3Api, event }) => {
             let tempEvent = await searchByName({ eventName: event[1], web3Api });
             if (tempEvent[7] === web3Api.signer.address) {  // ==> the real owner
                 if (ethers.toNumber(tempEvent[3]) < (Date.now() / 1000)) {  // ==> event is passed.
-                    // ......
+
                     const res = await web3Api.contract.getSoldtktAmount(ethers.toNumber(tempEvent[0]), tempEvent[1]);
-                    await res.wait()
-                    console.log(res);
+                    await res.wait();
                     return true;
                 } else {
                     alert(`You can't withdraw funds right now`);

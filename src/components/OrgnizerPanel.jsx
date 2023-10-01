@@ -1,15 +1,23 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import { allContexts } from '../App';
 import { formatUnixTimestamp } from './ShowEventDetails';
 import { toast } from 'react-toastify';
 import { showEventDetailsForOwner, withdrawEventFunds, checkCostumerTicketsById } from '../utils/ContractInteractions';
 import { ethers } from 'ethers';
 const OrgnizerPanel = () => {
-    const { web3Api } = useContext(allContexts);
+    const { web3Api, orgnizerEventDetails, setOrgnizerEventDetails, tktsAmount, setTicketsAmount } = useContext(allContexts);
     const id = useRef(null);
     const name = useRef(null);
-    const [eventDetails, setEventDetails] = useState(null);
-    const [tktsAmount, setTicketsAmount] = useState([]);
+
+    window.ethereum.on('chainChanged', () => {
+        setOrgnizerEventDetails(null);
+        setTicketsAmount([]);
+    });
+    window.ethereum.on('accountsChanged', () => {
+        setOrgnizerEventDetails(null);
+        setTicketsAmount([]);
+    });
+
     return (
         <div className='my-10 w-screen min-w-screen h-auto'>
             <div className='lg:w-5/12 md:w-7/12 my-0 mx-auto w-11/12 h-auto shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]'>
@@ -35,7 +43,7 @@ const OrgnizerPanel = () => {
                                         temp.push(res.tkts);
                                     }
                                     setTicketsAmount(temp);
-                                    setEventDetails(response);
+                                    setOrgnizerEventDetails(response);
                                 }
                                 else { reject(undefined); }
                             }), {
@@ -55,7 +63,7 @@ const OrgnizerPanel = () => {
                 </form >
             </div>
 
-            {eventDetails ? <div>
+            {orgnizerEventDetails ? <div>
                 <div className='w-full flex justify-center items-center my-16'>
                     <div className=' w-11/12 md:w-8/12 lg:w-6/12 text-sm md:text-base'>
                         <div className='w-full h-full flex items-center justify-between  shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]'>
@@ -68,12 +76,12 @@ const OrgnizerPanel = () => {
                                 <p className='p-1 font-bold md:text-lg text-md'>Raised amount</p>
                             </div>
                             <div className='w-7/12 pl-2'>
-                                <p className='p-1 md:text-lg text-md'>{ethers.toNumber(eventDetails[0])}</p>
-                                <p className='p-1 md:text-lg text-md'>{eventDetails[1]}</p>
-                                <p className='p-1 md:text-lg text-md'>{eventDetails[2]}</p>
-                                <p className='p-1 md:text-lg text-md'>{formatUnixTimestamp(ethers.toNumber(eventDetails[3]))}</p>
-                                <p className='p-1 md:text-lg text-md'>{ethers.toNumber(eventDetails[4]) - ethers.toNumber(eventDetails[5])}</p>
-                                <p className='p-1 md:text-lg text-md'>{ethers.formatEther(ethers.toNumber(eventDetails[6]) * (ethers.toNumber(eventDetails[4]) - ethers.toNumber(eventDetails[5])))} eth</p>
+                                <p className='p-1 md:text-lg text-md'>{ethers.toNumber(orgnizerEventDetails[0])}</p>
+                                <p className='p-1 md:text-lg text-md'>{orgnizerEventDetails[1]}</p>
+                                <p className='p-1 md:text-lg text-md'>{orgnizerEventDetails[2]}</p>
+                                <p className='p-1 md:text-lg text-md'>{formatUnixTimestamp(ethers.toNumber(orgnizerEventDetails[3]))}</p>
+                                <p className='p-1 md:text-lg text-md'>{ethers.toNumber(orgnizerEventDetails[4]) - ethers.toNumber(orgnizerEventDetails[5])}</p>
+                                <p className='p-1 md:text-lg text-md'>{ethers.formatEther(ethers.toNumber(orgnizerEventDetails[6]) * (ethers.toNumber(orgnizerEventDetails[4]) - ethers.toNumber(orgnizerEventDetails[5])))} eth</p>
                             </div>
                         </div>
                         <div className='w-full flex justify-center items-center'>
@@ -81,7 +89,7 @@ const OrgnizerPanel = () => {
 
                                 toast.promise(
                                     new Promise(async (resolve, reject) => {
-                                        const response = withdrawEventFunds({ web3Api, event: eventDetails });
+                                        const response = withdrawEventFunds({ web3Api, event: orgnizerEventDetails });
                                         response ? resolve(response) : reject(undefined);
                                     }), {
                                     success: 'Withdraw successfully',
@@ -105,7 +113,7 @@ const OrgnizerPanel = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {eventDetails[9].map((holder, index) => {
+                                {orgnizerEventDetails[9].map((holder, index) => {
                                     return <tr id={index}>
                                         <td className='border  py-2 px-4 border-slate-400'>{holder}</td>
                                         <td className='border py-2 px-4 border-slate-400'>{tktsAmount[index]}</td>

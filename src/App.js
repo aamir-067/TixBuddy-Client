@@ -30,6 +30,8 @@ function App() {
     const [totalEvents, setTotalEvents] = useState(0);
     const [eventDetails, setEventDetails] = useState(null);
     const [costumerDetails, setCostumerDetails] = useState(null);
+    const [orgnizerEventDetails, setOrgnizerEventDetails] = useState(null);
+    const [tktsAmount, setTicketsAmount] = useState([]);
 
 
     useEffect(() => {
@@ -44,7 +46,8 @@ function App() {
         <allContexts.Provider
             value={{
                 web3Api, setWeb3Api, totalEvents, isDeveloper, setTotalEvents, eventDetails,
-                setEventDetails, costumerDetails, setCostumerDetails, setIsMenuOpen, isMenuOpen
+                setEventDetails, costumerDetails, setCostumerDetails, setIsMenuOpen, isMenuOpen,
+                orgnizerEventDetails, setOrgnizerEventDetails, tktsAmount, setTicketsAmount
             }}>
             <HashRouter>
                 <div className="w-screen min-h-screen overflow-x-hidden bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100">

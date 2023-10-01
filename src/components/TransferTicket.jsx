@@ -31,8 +31,8 @@ const TransferTicket = () => {
                                 res ? resolve() : reject();
                             }
                         }), {
-                            success: 'ss',
-                            error: 'err',
+                            success: 'transfer successfully',
+                            error: 'unknown error occurred',
                             pending: 'processing'
                         })
 
